@@ -95,12 +95,12 @@ public class World {
 
     public void lowerBoards() {
         for (IBoard b : iBoardList)
-            b.raise();
+            b.lower();
     }
 
     public void raiseBoards() {
         for (IBoard b : iBoardList)
-            b.lower();
+            b.raise();
     }
 }
 
