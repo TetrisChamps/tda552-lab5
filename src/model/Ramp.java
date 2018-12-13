@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * A representation of a ramp
+ */
 public class Ramp extends Board {
     private boolean up = true; // Whether the board is up or down
 
@@ -19,8 +22,7 @@ public class Ramp extends Board {
     }
 
     @Override
-    public int getAngle()
-    {
+    public int getAngle() {
         return up ? 90 : 0;
     }
 }

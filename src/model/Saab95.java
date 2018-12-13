@@ -14,7 +14,7 @@ public class Saab95 extends Car implements ITurbo {
      * Initiates a standard Saab95
      */
     Saab95() {
-        super(2, 125, Color.red, "Saab95", 0, 0, 1500,60,100);
+        super(2, 125, Color.red, "Saab95", 0, 0, 1500, 60, 100);
         setTurboOff();
     }
 
@@ -36,6 +36,7 @@ public class Saab95 extends Car implements ITurbo {
 
     /**
      * Returns the true if the turbo is enabled, else returns false
+     *
      * @return boolean
      */
     public boolean isTurboOn() {

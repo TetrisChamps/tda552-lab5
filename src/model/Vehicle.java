@@ -21,16 +21,15 @@ public abstract class Vehicle implements IMovable {
     /**
      * Standard constructor for making an abstract vehicle, must be called from subclass
      *
-     * @param color
-     * @param modelName
-     * @param x         Coordinate x
-     * @param y         Coordinate y
+     * @param color     The color of the vehicle
+     * @param modelName The model name of the vehicle
+     * @param x         Coordinate x of the vehicle
+     * @param y         Coordinate y of the vehicle
      * @param weight    the weight of the vehicle
      * @param height    the height of the vehicle
      * @param width     the width  of the vehicle
      */
-
-    public Vehicle(Color color, String modelName, double x, double y, int weight,int height,int width) {
+    public Vehicle(Color color, String modelName, double x, double y, int weight, int height, int width) {
 
         this.color = color;
         this.modelName = modelName;
@@ -235,6 +234,11 @@ public abstract class Vehicle implements IMovable {
         return loaded;
     }
 
+    /**
+     * Returns the weight of the vehicle
+     *
+     * @return
+     */
     public int getWeight() {
         return weight;
     }

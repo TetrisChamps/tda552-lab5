@@ -2,8 +2,6 @@ import gui.CarController;
 import gui.CarView;
 import model.*;
 
-import java.util.ArrayList;
-
 public class Application {
 
 

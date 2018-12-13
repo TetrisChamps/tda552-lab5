@@ -6,7 +6,6 @@ package model;
 public class Board {
     private int angle = 0; // The angle of the board, 0 = down
 
-
     /**
      * Raises the board by 10 degrees
      */

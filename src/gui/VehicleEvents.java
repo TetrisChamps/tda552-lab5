@@ -1,6 +1,8 @@
 package gui;
 
-
+/**
+ * An enum of all the events than can be broadcast by a car observable
+ */
 public enum VehicleEvents {
     GAS,
     BREAK,

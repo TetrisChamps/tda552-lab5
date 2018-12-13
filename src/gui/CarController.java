@@ -12,17 +12,13 @@ import java.awt.event.ActionListener;
  * It's responsibilities is to listen to the View and responds in a appropriate manner by
  * modifying the model state and the updating the view.
  */
-
 public class CarController implements VehicleObserver {
-    // member fields:
-
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     private Timer timer = new Timer(delay, new TimerListener());
     private World world;
     private CarView frame;
 
-    // Calls the gas method for each car once
     public CarController(World world, CarView frame) {
         this.world = world;
         this.frame = frame;
@@ -32,7 +28,7 @@ public class CarController implements VehicleObserver {
         world.addVehicle(VehicleFactory.createScania().setPosition(0, 400));
     }
 
-    public void startTimer(){
+    public void startTimer() {
         timer.start();
     }
 
@@ -63,13 +59,12 @@ public class CarController implements VehicleObserver {
                 world.lowerBoards();
                 break;
         }
-
-
     }
 
-    /* Each step the TimerListener moves all thegameWorld.getVehicles() in the list and tells the
-     * view to update its images. Change this method to your needs.
-     * */
+    /**
+     * Each step, the TimerListener updates the world, feeds the updated information to the view and tells the
+     * frame to repaint
+     */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             world.update();

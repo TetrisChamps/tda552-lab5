@@ -1,7 +1,6 @@
 package model;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * A class that can hold cars.
@@ -25,8 +24,6 @@ public class CarCarrier {
     /**
      * Sets the position of all the loaded cars
      *
-     * @param x
-     * @param y
      */
     public void move(double x, double y) {
         for (Car car : cars) {
@@ -39,12 +36,10 @@ public class CarCarrier {
      *
      * @param car The car to be added.
      */
-    //TODO this could just return a boolean, perhaps its harder to test functionality then?
     public void addCar(Car car, Vehicle vehicle) {
         if (vehicle == car) {
             throw new IllegalArgumentException("Cannot add itself to the transport carrier");
         }
-        // TODO: dont allow cars above a certain weight to be added
         if (cars.size() < capacity) {
             if (!cars.contains(car)) {
                 if (car.getWeight() < maxWeight) {
@@ -86,6 +81,7 @@ public class CarCarrier {
 
     /**
      * Returns number of loaded cars.
+     *
      * @return the number of loaded cars.
      */
     public int getNumberOfCars() {

@@ -13,18 +13,9 @@ import java.awt.event.ActionListener;
  * It initializes with being center on the screen and attaching it's controller in it's state.
  * It communicates with the Controller by calling methods of it when an onVehicleAction fires of in
  * each of it's components.
- * TODO: Write more actionListeners and wire the rest of the buttons
- **/
-
+ */
 public class CarView extends JFrame {
-    private int X;
-    private int Y;
-
     private ArrayList<VehicleObserver> actionList = new ArrayList<>();
-
-
-
-    // The controller member
 
     DrawPanel drawPanel;
 
@@ -32,7 +23,7 @@ public class CarView extends JFrame {
 
     private JPanel gasPanel = new JPanel();
     private JSpinner gasSpinner = new JSpinner();
-    protected int gasAmount = 100;
+    int gasAmount = 100;
     private JLabel gasLabel = new JLabel("Amount of gas");
 
     private JButton gasButton = new JButton("Gas");
@@ -45,17 +36,15 @@ public class CarView extends JFrame {
     private JButton startButton = new JButton("Start all cars");
     private JButton stopButton = new JButton("Stop all cars");
 
-    // Constructor
-    public CarView(String framename,int sizeX,int sizeY) {
-        this.X = sizeX;
-        this.Y = sizeY;
-        drawPanel = new DrawPanel(X, Y - 240);
-        initComponents(framename,sizeX,sizeY);
+    public CarView(String framename, int sizeX, int sizeY) {
+        drawPanel = new DrawPanel(sizeX, sizeY - 240);
+        initComponents(framename, sizeX, sizeY);
     }
 
-    // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
-    private void initComponents(String title,int x,int y) {
+    /**
+     * Initialise the components of the frame
+     */
+    private void initComponents(String title, int x, int y) {
 
         this.setTitle(title);
         this.setPreferredSize(new Dimension(x, y));
@@ -63,18 +52,13 @@ public class CarView extends JFrame {
 
         this.add(drawPanel);
 
-
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
                         100, //max
                         1);//step
         gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
-            }
-        });
+        gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner) e.getSource()).getValue());
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -90,74 +74,31 @@ public class CarView extends JFrame {
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X / 2) + 4, 200));
+        controlPanel.setPreferredSize(new Dimension((x / 2) + 4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
-
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
+        startButton.setPreferredSize(new Dimension(x / 5 - 15, 200));
         this.add(startButton);
-
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X / 5 - 15, 200));
+        stopButton.setPreferredSize(new Dimension(x / 5 - 15, 200));
         this.add(stopButton);
 
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyCarObserver(VehicleEvents.GAS);
-            }
-        });
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyCarObserver(VehicleEvents.BREAK);
-            }
-        });
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyCarObserver(VehicleEvents.START_ALL);
-            }
-        });
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyCarObserver(VehicleEvents.STOP_ALL);
-            }
-        });
-        turboOnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyCarObserver(VehicleEvents.TURBO_ON);
-            }
-        });
-        turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyCarObserver(VehicleEvents.TURBO_OFF);
-            }
-        });
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyCarObserver(VehicleEvents.RAISE_BOARD);
-            }
-        });
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                notifyCarObserver(VehicleEvents.LOWER_BED);
-            }
-        });
+        gasButton.addActionListener(e -> notifyCarObserver(VehicleEvents.GAS));
+        brakeButton.addActionListener(e -> notifyCarObserver(VehicleEvents.BREAK));
+        startButton.addActionListener(e -> notifyCarObserver(VehicleEvents.START_ALL));
+        stopButton.addActionListener(e -> notifyCarObserver(VehicleEvents.STOP_ALL));
+        turboOnButton.addActionListener(e -> notifyCarObserver(VehicleEvents.TURBO_ON));
+        turboOffButton.addActionListener(e -> notifyCarObserver(VehicleEvents.TURBO_OFF));
+        liftBedButton.addActionListener(e -> notifyCarObserver(VehicleEvents.RAISE_BOARD));
+        lowerBedButton.addActionListener(e -> notifyCarObserver(VehicleEvents.LOWER_BED));
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
-
         // Get the computer screen resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         // Center the frame
@@ -168,16 +109,25 @@ public class CarView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /**
+     * Add an observer that should listen to events send from this observable
+     */
     public void addObserver(VehicleObserver action) {
         actionList.add(action);
     }
 
+    /**
+     * Remove an observer
+     */
     public void deleteObserver(VehicleObserver action) {
         actionList.remove(action);
     }
 
+    /**
+     * Broadcast an event to the observers
+     */
     public void notifyCarObserver(VehicleEvents actionEnum) {
-        for (VehicleObserver actorObject: actionList) {
+        for (VehicleObserver actorObject : actionList) {
             actorObject.onVehicleAction(actionEnum);
         }
     }

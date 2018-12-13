@@ -12,7 +12,7 @@ public class Scania extends Car implements IBoard {
      * Creates a normal Scania truck.
      */
     Scania() {
-        super(2, 400, Color.RED, "Scania", 0, 0, 5000,100,200);
+        super(2, 400, Color.RED, "Scania", 0, 0, 5000, 100, 200);
     }
 
     /**
@@ -47,10 +47,9 @@ public class Scania extends Car implements IBoard {
     }
 
     /**
-     *
-     * @return
+     * Returns the angle of the board
      */
-    public int getBoardAngle(){
+    public int getBoardAngle() {
         return board.getAngle();
     }
 }

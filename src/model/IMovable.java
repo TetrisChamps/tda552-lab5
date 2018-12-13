@@ -12,13 +12,11 @@ public interface IMovable {
     /**
      * Turns the object to the left
      */
-
     void turnLeft();
 
     /**
      * Turns the object to the right.
      */
-
     void turnRight();
 
 }

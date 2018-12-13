@@ -1,7 +1,6 @@
 package model;
 
 import java.awt.Color;
-import java.util.List;
 
 /**
  * A Ferry that transports cars
@@ -16,11 +15,11 @@ public class CarFerry extends Vehicle implements ICarTransporter {
     /**
      * Initiates an instances of a CarFerry
      *
-     * @param x           The start x coordinate of the ferry
-     * @param y           The start y coordinate
+     * @param x The start x coordinate of the ferry
+     * @param y The start y coordinate
      */
     public CarFerry(double x, double y) {
-        super(Color.RED, "Car Ferry 101", x, y, 30000000,60,100);
+        super(Color.RED, "Car Ferry 101", x, y, 30000000, 60, 100);
         this.enginePower = 3000;
         transporter = new CarCarrier(300, 2000);
     }
@@ -92,12 +91,12 @@ public class CarFerry extends Vehicle implements ICarTransporter {
         super.rotateVehicle(-10);
     }
 
-    public int getNumberOfCars(){
+    public int getNumberOfCars() {
         return transporter.getNumberOfCars();
     }
 
 
-    public boolean docked(){
+    public boolean docked() {
         return inDock;
     }
 }
