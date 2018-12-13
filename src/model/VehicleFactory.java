@@ -8,7 +8,7 @@ public class VehicleFactory {
     /**
      * Creates a Saab 9-5 car
      *
-     * @return
+     * @return  The Saab 9-5
      */
     public static Vehicle createSaab95() {
         return new Saab95();
@@ -17,7 +17,7 @@ public class VehicleFactory {
     /**
      * Creates a Scania truck
      *
-     * @return
+     * @return  The Scania truck
      */
     public static Vehicle createScania() {
         return new Scania();
@@ -26,7 +26,7 @@ public class VehicleFactory {
     /**
      * Creates a Volvo 240 car
      *
-     * @return
+     * @return  The Volvo 240
      */
     public static Vehicle createVolvo240() {
         return new Volvo240();
@@ -35,7 +35,7 @@ public class VehicleFactory {
     /**
      * Creates a Car transporter truck
      *
-     * @return
+     * @return  The car transporter
      */
     public static Vehicle createCarTransporter() {
         return new CarTransporter();
@@ -44,7 +44,7 @@ public class VehicleFactory {
     /**
      * Create a ferry that carries cars
      *
-     * @return
+     * @return  The car ferry
      */
     public static Vehicle createCarFerry() {
         return new CarFerry(0, 0);

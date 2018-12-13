@@ -24,6 +24,8 @@ public class CarCarrier {
     /**
      * Sets the position of all the loaded cars
      *
+     * @param x     x-coordinate to place the cars at (should be the x position of the carrying vehicle)
+     * @param y     t-coordinate to place the cars at (should be the y position of the carrying vehicle)
      */
     public void move(double x, double y) {
         for (Car car : cars) {
@@ -35,6 +37,7 @@ public class CarCarrier {
      * Adds a car to the trailer if there is still enough room left and the ramp is down.
      *
      * @param car The car to be added.
+     * @param vehicle The vehicle on which the car is to be loaded onto
      */
     public void addCar(Car car, Vehicle vehicle) {
         if (vehicle == car) {
@@ -63,7 +66,8 @@ public class CarCarrier {
      * If there are no cars on the trailer null is returned.
      *
      * @param first Specifies whether the first or last car in gets removed first
-     * @return the removed car.
+     * @param vehicle Next to which vehicle to place the vehicle
+     * @return The removed car
      */
     public Car removeCar(boolean first, Vehicle vehicle) {
         Car car = null;

@@ -57,7 +57,7 @@ public abstract class Vehicle implements IMovable {
     /**
      * Return the height of the vehicle
      *
-     * @return
+     * @return The height of the vehicle
      */
     public int getHeight() {
         return height;
@@ -66,7 +66,7 @@ public abstract class Vehicle implements IMovable {
     /**
      * Return the width of the vehicle
      *
-     * @return
+     * @return The width of the vehicle
      */
     public int getWidth() {
         return width;
@@ -76,7 +76,7 @@ public abstract class Vehicle implements IMovable {
     /**
      * Return the model name of the vehicle
      *
-     * @return
+     * @return The model name
      */
     public String getModelName() {
         return modelName;
@@ -85,7 +85,7 @@ public abstract class Vehicle implements IMovable {
     /**
      * Returns the colour of the vehicle
      *
-     * @return
+     * @return The color of the vehicle
      */
     public Color getColor() {
         return color;
@@ -100,7 +100,6 @@ public abstract class Vehicle implements IMovable {
         y += Math.sin(Math.toRadians(rotation)) * speed;
     }
 
-
     /**
      * Returns the maximum acceleration of the Vehicle.
      *
@@ -113,13 +112,11 @@ public abstract class Vehicle implements IMovable {
         speed = maxSpeed() >= newSpeed ? newSpeed : maxSpeed();
     }
 
-
     /**
      * Decreses the speed by amount
      *
      * @param amount
      */
-
     private void decreaseSpeed(double amount) {
         double newSpeed = speed - speedFactor() * amount;
         speed = newSpeed > 0 ? newSpeed : 0;
@@ -128,9 +125,8 @@ public abstract class Vehicle implements IMovable {
     /**
      * Increases the current speed, must be called from overridden subclasses
      *
-     * @return
+     * @param amount Gas amount (0.0 - 1.0)
      */
-
     public void gas(double amount) {
         increaseSpeed(Maths.clamp(amount, 0.0, 1.0));
     }
@@ -139,9 +135,8 @@ public abstract class Vehicle implements IMovable {
     /**
      * Decreases the speed of the vehicle, must be called from overriden methods.
      *
-     * @param amount
+     * @param amount Brake amount (0.0 - 1.0)
      */
-
     public void brake(double amount) {
         decreaseSpeed(Maths.clamp(amount, 0.0, 1.0));
     }
@@ -159,11 +154,13 @@ public abstract class Vehicle implements IMovable {
      *
      * @return Current speed
      */
-
     public double getSpeed() {
         return speed;
     }
 
+    /**
+     * Stops the vehicle abruptly
+     */
     public void stop() {
         speed = 0;
     }
@@ -177,7 +174,6 @@ public abstract class Vehicle implements IMovable {
      *
      * @return Vehicle rotation
      */
-
     public double getRotation() {
         return rotation;
     }
@@ -191,10 +187,20 @@ public abstract class Vehicle implements IMovable {
         this.rotation = applyDeltaToAngle(this.rotation, deltaAngle);
     }
 
+    /**
+     * Gets the x position of the vehicle
+     *
+     * @return x-coordinate
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Gets the y position of the vehicle
+     *
+     * @return y-coordinate
+     */
     public double getY() {
         return y;
     }
@@ -202,8 +208,9 @@ public abstract class Vehicle implements IMovable {
     /**
      * Sets the x and y coordinates of the vehicle
      *
-     * @param x
-     * @param y
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return this
      */
     public Vehicle setPosition(double x, double y) {
         this.x = x;
@@ -228,7 +235,7 @@ public abstract class Vehicle implements IMovable {
     /**
      * Returns whether the vehicle is loaded or not
      *
-     * @return
+     * @return If the vehicle is loaded
      */
     public boolean isLoaded() {
         return loaded;
@@ -237,7 +244,7 @@ public abstract class Vehicle implements IMovable {
     /**
      * Returns the weight of the vehicle
      *
-     * @return
+     * @return The vehicle's weight
      */
     public int getWeight() {
         return weight;

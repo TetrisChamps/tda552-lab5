@@ -58,7 +58,7 @@ public class World {
     /**
      * Returns the list of vehicles contained within the world
      *
-     * @return
+     * @return  The list of vehicles in the world
      */
     public List<Vehicle> getVehicles() {
         return new ArrayList<>(vehicles);
@@ -67,7 +67,7 @@ public class World {
     /**
      * Adds a vehicle to the world
      *
-     * @param v
+     * @param v     Reference to the vehicle to add
      */
     public void addVehicle(Vehicle v) {
         if (v instanceof ITurbo)
@@ -98,7 +98,7 @@ public class World {
     /**
      * Pushed the "throttle" of all the vehicles
      *
-     * @param amount
+     * @param amount    How hard to press the throttle
      */
     public void gasVehicles(double amount) {
         for (Vehicle v : vehicles)
@@ -108,7 +108,7 @@ public class World {
     /**
      * Pressed the "brake" for all the vehicles
      *
-     * @param amount
+     * @param amount     How hard to push the brake
      */
     public void brakeVehicles(double amount) {
         for (Vehicle v : vehicles)

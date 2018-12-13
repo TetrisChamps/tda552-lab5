@@ -20,6 +20,8 @@ public abstract class Car extends Vehicle implements IEngine {
      * @param x           The x coordinate of the car.
      * @param y           The y coordinate of the car.
      * @param weight      The weight of the car.
+     * @param height      The height of the car (2D)
+     * @param width       The width of the car (2D)
      */
     public Car(int nrDoors, double enginePower, Color color, String modelName, int x, int y, int weight, int height, int width) {
         super(color, modelName, x, y, weight, height, width);
@@ -75,7 +77,6 @@ public abstract class Car extends Vehicle implements IEngine {
 
     /**
      * Applies the throttle between 0-1
-     *
      */
     public void gas(double amount) {
         if (engineOn && !isLoaded()) {
@@ -90,7 +91,6 @@ public abstract class Car extends Vehicle implements IEngine {
 
     /**
      * Presses down the brake by a factor of 0-1
-     *
      */
     public void brake(double amount) {
         super.brake(amount);

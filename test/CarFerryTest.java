@@ -41,7 +41,7 @@ class CarFerryTest {
         Car car = (Saab95) VehicleFactory.createSaab95();
         carFerry.dock();
         carFerry.addCar(car);
-        carFerry.unDock();
+        carFerry.undock();
         assertEquals(null, carFerry.removeCar());
         carFerry.dock();
         assertEquals(car, carFerry.removeCar());
@@ -55,7 +55,7 @@ class CarFerryTest {
 
     @Test
     void unDock() {
-        carFerry.unDock();
+        carFerry.undock();
         assertEquals(carFerry.docked(), false);
     }
 

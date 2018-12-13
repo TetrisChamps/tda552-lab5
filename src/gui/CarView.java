@@ -2,11 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -15,7 +11,7 @@ import java.awt.event.ActionListener;
  * each of it's components.
  */
 public class CarView extends JFrame {
-    private ArrayList<VehicleObserver> actionList = new ArrayList<>();
+    private ArrayList<VehicleObserver> observers = new ArrayList<>();
 
     DrawPanel drawPanel;
 
@@ -111,23 +107,29 @@ public class CarView extends JFrame {
 
     /**
      * Add an observer that should listen to events send from this observable
+     *
+     * @param observer The observer
      */
-    public void addObserver(VehicleObserver action) {
-        actionList.add(action);
+    public void addObserver(VehicleObserver observer) {
+        observers.add(observer);
     }
 
     /**
      * Remove an observer
+     *
+     * @param observer The observer
      */
-    public void deleteObserver(VehicleObserver action) {
-        actionList.remove(action);
+    public void deleteObserver(VehicleObserver observer) {
+        observers.remove(observer);
     }
 
     /**
      * Broadcast an event to the observers
+     *
+     * @param actionEnum The action
      */
     public void notifyCarObserver(VehicleEvents actionEnum) {
-        for (VehicleObserver actorObject : actionList) {
+        for (VehicleObserver actorObject : observers) {
             actorObject.onVehicleAction(actionEnum);
         }
     }

@@ -43,7 +43,6 @@ public class CarFerry extends Vehicle implements ICarTransporter {
      *
      * @return The unloaded car
      */
-
     @Override
     public Car removeCar() {
         Car car = null;
@@ -65,7 +64,7 @@ public class CarFerry extends Vehicle implements ICarTransporter {
     /**
      * Undocks the ferry, disables the ability to load cars
      */
-    public void unDock() {
+    public void undock() {
         if (getSpeed() == 0) {
             inDock = false;
         }
@@ -95,7 +94,11 @@ public class CarFerry extends Vehicle implements ICarTransporter {
         return transporter.getNumberOfCars();
     }
 
-
+    /**
+     * Return whether the ferry is docked or not
+     *
+     * @return True if docked, else false
+     */
     public boolean docked() {
         return inDock;
     }

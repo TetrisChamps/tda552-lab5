@@ -48,6 +48,8 @@ public class Scania extends Car implements IBoard {
 
     /**
      * Returns the angle of the board
+     *
+     * @return  The board angle
      */
     public int getBoardAngle() {
         return board.getAngle();

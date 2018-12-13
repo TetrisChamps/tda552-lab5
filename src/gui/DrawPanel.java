@@ -37,6 +37,8 @@ public class DrawPanel extends JPanel {
 
     /**
      * Set the vehicles that should be drawn on the frame
+     *
+     * @param vehicles List of vehicles to be drawn
      */
     public void setVehicles(List<Vehicle> vehicles) {
         this.vehicles = vehicles;

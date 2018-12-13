@@ -9,6 +9,11 @@ public class CarTransporter extends Car implements ICarTransporter, IBoard {
     private CarCarrier transporter = new CarCarrier(15, 2000);
     private Ramp ramp = new Ramp();
 
+    /**
+     * Number of cars being carried
+     *
+     * @return Number of cars carried
+     */
     public int getNumberOfCars() {
         return transporter.getNumberOfCars();
     }
