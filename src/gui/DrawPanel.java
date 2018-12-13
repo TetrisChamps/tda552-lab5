@@ -1,16 +1,18 @@
 package gui;
 
 import javafx.util.Pair;
-import model.*;
+import model.Car;
+import model.Vehicle;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.html.HTMLDocument;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 // This panel represent the animated part of the view with the car images.
@@ -18,7 +20,8 @@ import java.util.Map;
 public class DrawPanel extends JPanel {
 
     private Map<String, BufferedImage> carImages = new HashMap<>();
-    private Map<Point, Pair<BufferedImage,Pair<Integer,Integer>>> imageAndSizePoints = new HashMap<>();
+    private List<Vehicle> vehicles = new ArrayList<>();
+
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
@@ -32,21 +35,17 @@ public class DrawPanel extends JPanel {
             // if you are starting in IntelliJ.
             // Linux users need to modify \ to / in path string
             //TODO
-            carImages.put("Volvo240", ImageIO.read(new File("resources\\Volvo240.jpg")));
-            carImages.put("Scania", ImageIO.read(new File("resources\\Scania.jpg")));
-            carImages.put("Saab95", ImageIO.read(new File("resources\\Saab95.jpg")));
+            carImages.put("Volvo240", ImageIO.read(new File("resources/Volvo240.jpg")));
+            carImages.put("Scania", ImageIO.read(new File("resources/Scania.jpg")));
+            carImages.put("Saab95", ImageIO.read(new File("resources/Saab95.jpg")));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
     }
 
-    BufferedImage getImageFromClass(String s) {
-        return carImages.get(s);
-    }
-
-    void moveit(String s, int x, int y,Integer height,Integer width) {
-        imageAndSizePoints.put(new Point(x, y),new Pair<>(carImages.get(s),new Pair<>(height,width)));
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -55,16 +54,12 @@ public class DrawPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (Map.Entry<Point, Pair<BufferedImage,Pair<Integer,Integer>>> entry : imageAndSizePoints.entrySet()) {
-            Point p = entry.getKey();
-            BufferedImage i = entry.getValue().getKey();
-            int height = entry.getValue().getValue().getKey();
-            int width = entry.getValue().getValue().getValue();
-            g.drawImage(i, p.x, p.y,width,height,null);
+        for (Vehicle v : vehicles) {
+            BufferedImage i = carImages.get(v.getModelName());
+            if (i == null) {
+                continue;
+            }
+            g.drawImage(i, (int) Math.floor(v.getX()), (int) Math.floor(v.getY()), v.getWidth(), v.getHeight(), null);
         }
-
-        imageAndSizePoints.clear();
-        //carPoints.forEach();
-        //g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
     }
 }

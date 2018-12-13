@@ -33,7 +33,7 @@ public class CarView extends JFrame {
 
     private JPanel gasPanel = new JPanel();
     private JSpinner gasSpinner = new JSpinner();
-    protected int gasAmount = 0;
+    protected int gasAmount = 100;
     private JLabel gasLabel = new JLabel("Amount of gas");
 
     private JButton gasButton = new JButton("Gas");

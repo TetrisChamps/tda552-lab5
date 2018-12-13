@@ -3,13 +3,10 @@ package gui;
 import model.Car;
 import model.Saab95;
 import model.Scania;
-import model.Volvo240;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 /*
  * This class represents the Controller part in the MVC pattern.
@@ -158,24 +155,8 @@ public class CarController implements Action {
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : gameWorld.getCars()) {
-                if (gameWorld.isOutOfBounds(car, car.getX(), car.getY())) {
-                    car.stop();
-                    BufferedImage i = frame.drawPanel.getImageFromClass(car.getModelName());
-                    if (car.getX() < 0) {
-                        car.setPosition(0, car.getY());
-                    } else {
-                        car.setPosition(frame.drawPanel.getWidth() - i.getWidth(), car.getY());
-                    }
-                    car.invertDirection();
-                    car.gas(1.0);
-                }
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(car.getModelName(), x, y,car.getHeight(),car.getWidth());
-                // repaint() calls the paintComponent method of the panel
-            }
             gameWorld.update();
+            frame.drawPanel.setVehicles(gameWorld.getCars());
             frame.drawPanel.repaint();
         }
     }
