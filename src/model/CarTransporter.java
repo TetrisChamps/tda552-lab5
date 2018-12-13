@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * A higher order representation of an abstract truck.
  */
-public class CarTransporter extends Car implements  ICarTransporter{
+public class CarTransporter extends Car implements  ICarTransporter, IBoard{
     private CarCarrier transporter = new CarCarrier(15, 2000);
     private Ramp ramp = new Ramp();
 
@@ -52,14 +52,14 @@ public class CarTransporter extends Car implements  ICarTransporter{
     /**
      * Lowers the ramp if the trailer is not moving.
      */
-    public void raiseRamp() {
+    public void raise() {
         ramp.raise();
     }
 
     /**
      * Highers the ramp, no cars can be added or removed.
      */
-    public void lowerRamp() {
+    public void lower() {
         ramp.lower();
     }
 

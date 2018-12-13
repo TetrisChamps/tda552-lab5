@@ -6,14 +6,14 @@ import java.awt.*;
  * A representation of a SAAB 95 car
  */
 
-public class Saab95 extends Car {
+public class Saab95 extends Car implements ITurbo {
 
     private boolean turboOn;
 
     /**
      * Initiates a standard Saab95
      */
-    public Saab95() {
+    Saab95() {
         super(2, 125, Color.red, "Saab95", 0, 0, 1500,60,100);
         setTurboOff();
     }
@@ -21,6 +21,7 @@ public class Saab95 extends Car {
     /**
      * Turns on the turbo, making the car accelerate faster
      */
+    @Override
     public void setTurboOn() {
         turboOn = true;
     }
@@ -28,6 +29,7 @@ public class Saab95 extends Car {
     /**
      * Turn the turbo off
      */
+    @Override
     public void setTurboOff() {
         turboOn = false;
     }
@@ -39,7 +41,6 @@ public class Saab95 extends Car {
     public boolean isTurboOn() {
         return turboOn;
     }
-
 
     public double speedFactor() {
         double turbo = 1;

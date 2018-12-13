@@ -1,4 +1,5 @@
 import model.Scania;
+import model.VehicleFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ class ScaniaTest {
 
     @BeforeEach
     void setUp() {
-        scania = new Scania();
+        scania = (Scania) VehicleFactory.createScania();
     }
 
     @AfterEach
@@ -21,38 +22,38 @@ class ScaniaTest {
     @Test
     void raiseBoard() {
         assertEquals(scania.getBoardAngle(), 0);
-        scania.raiseBoard();
-        scania.raiseBoard();
-        scania.raiseBoard();
+        scania.raise();
+        scania.raise();
+        scania.raise();
         assertEquals(scania.getBoardAngle(), 30);
     }
 
     @Test
     void lowerBoard() {
-        scania.raiseBoard();
+        scania.raise();
         assertEquals(scania.getBoardAngle(), 10);
-        scania.lowerBoard();
+        scania.lower();
         assertEquals(scania.getBoardAngle(), 0);
-        scania.lowerBoard();
+        scania.lower();
         assertEquals(scania.getBoardAngle(), 0);
     }
 
     @Test
     void getBoardAngle() {
-        scania.raiseBoard();
-        scania.raiseBoard();
-        scania.raiseBoard();
-        scania.raiseBoard();
+        scania.raise();
+        scania.raise();
+        scania.raise();
+        scania.raise();
         assertEquals(scania.getBoardAngle(), 40);
     }
 
     @Test
     void gas() {
-        scania.raiseBoard();
+        scania.raise();
         scania.startEngine();
         scania.gas(1);
         assertEquals(scania.getSpeed(), 0);
-        scania.lowerBoard();
+        scania.lower();
         scania.gas(1);
         assertNotEquals(scania.getSpeed(), 0);
     }

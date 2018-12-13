@@ -1,5 +1,6 @@
 import model.Car;
 import model.Scania;
+import model.VehicleFactory;
 import model.Volvo240;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,8 @@ class CarTest {
 
     @BeforeEach
     void setUp() {
-        car = new Volvo240();
+        car = (Volvo240) VehicleFactory.createVolvo240();
+
     }
 
     @Test
@@ -54,7 +56,7 @@ class CarTest {
 
     @Test
     void speedFactor() {
-        car = new Scania();
+        car = (Scania) VehicleFactory.createScania();
         assertEquals(4.0, car.speedFactor());
     }
 

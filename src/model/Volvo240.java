@@ -15,7 +15,7 @@ public class Volvo240 extends Car{
     /**
      * Initiates a standard volvo240
      */
-    public Volvo240(){
+    Volvo240(){
         super(4,100,Color.black,"Volvo240", 0, 0, 1200,60,100);
     }
 

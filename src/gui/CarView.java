@@ -1,6 +1,5 @@
 package gui;
 
-import model.Saab95;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -12,7 +11,7 @@ import java.awt.event.ActionListener;
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
  * It initializes with being center on the screen and attaching it's controller in it's state.
- * It communicates with the Controller by calling methods of it when an action fires of in
+ * It communicates with the Controller by calling methods of it when an onVehicleAction fires of in
  * each of it's components.
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
@@ -21,7 +20,7 @@ public class CarView extends JFrame {
     private int X;
     private int Y;
 
-    private ArrayList<Action> actionList = new ArrayList<>();
+    private ArrayList<VehicleObserver> actionList = new ArrayList<>();
 
 
 
@@ -52,8 +51,6 @@ public class CarView extends JFrame {
         this.Y = sizeY;
         drawPanel = new DrawPanel(X, Y - 240);
         initComponents(framename,sizeX,sizeY);
-
-
     }
 
     // Sets everything in place and fits everything
@@ -112,49 +109,49 @@ public class CarView extends JFrame {
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                broadcast(Actions.GAS);
+                notifyCarObserver(VehicleEvents.GAS);
             }
         });
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                broadcast(Actions.BREAK);
+                notifyCarObserver(VehicleEvents.BREAK);
             }
         });
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                broadcast(Actions.STARTALL);
+                notifyCarObserver(VehicleEvents.START_ALL);
             }
         });
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                broadcast(Actions.STOPALL);
+                notifyCarObserver(VehicleEvents.STOP_ALL);
             }
         });
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                broadcast(Actions.TURBOON);
+                notifyCarObserver(VehicleEvents.TURBO_ON);
             }
         });
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                broadcast(Actions.TURBOOFF);
+                notifyCarObserver(VehicleEvents.TURBO_OFF);
             }
         });
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                broadcast(Actions.LIFTBED);
+                notifyCarObserver(VehicleEvents.RAISE_BOARD);
             }
         });
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                broadcast(Actions.LOWERBED);
+                notifyCarObserver(VehicleEvents.LOWER_BED);
             }
         });
 
@@ -171,17 +168,17 @@ public class CarView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void addObserver(Action action) {
+    public void addObserver(VehicleObserver action) {
         actionList.add(action);
     }
 
-    public void deleteObserver(Action action) {
+    public void deleteObserver(VehicleObserver action) {
         actionList.remove(action);
     }
 
-    public void broadcast(Actions actionEnum) {
-        for (Action actorObject: actionList) {
-            actorObject.action(actionEnum);
+    public void notifyCarObserver(VehicleEvents actionEnum) {
+        for (VehicleObserver actorObject: actionList) {
+            actorObject.onVehicleAction(actionEnum);
         }
     }
 }

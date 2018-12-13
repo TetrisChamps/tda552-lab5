@@ -1,6 +1,0 @@
-package gui;
-
-
-public enum Actions{
-    GAS,BREAK,STARTALL,STOPALL,TURBOON,TURBOOFF,LIFTBED,LOWERBED
-}

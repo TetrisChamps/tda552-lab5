@@ -206,9 +206,10 @@ public abstract class Vehicle implements IMovable {
      * @param x
      * @param y
      */
-    public void setPosition(double x, double y) {
+    public Vehicle setPosition(double x, double y) {
         this.x = x;
         this.y = y;
+        return this;
     }
 
     /**

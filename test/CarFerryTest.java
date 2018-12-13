@@ -1,6 +1,7 @@
 import model.Car;
 import model.CarFerry;
 import model.Saab95;
+import model.VehicleFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class CarFerryTest {
 
     @Test
     void addCar() {
-        Car car = new Saab95();
+        Car car = (Saab95) VehicleFactory.createSaab95();
         try {
             carFerry.addCar(car);
             assertEquals(true, false);
@@ -37,7 +38,7 @@ class CarFerryTest {
 
     @Test
     void removeCar() {
-        Car car = new Saab95();
+        Car car = (Saab95) VehicleFactory.createSaab95();
         carFerry.dock();
         carFerry.addCar(car);
         carFerry.unDock();

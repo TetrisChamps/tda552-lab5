@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * A wheeled motor-driven vehicle
  */
-public abstract class Car extends Vehicle {
+public abstract class Car extends Vehicle implements IEngine {
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private boolean engineOn = false; // Whether the engine is on or not

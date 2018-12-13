@@ -1,8 +1,7 @@
 package gui;
 
-import model.Car;
-import model.Saab95;
-import model.Scania;
+import model.VehicleFactory;
+import model.World;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,149 +13,67 @@ import java.awt.event.ActionListener;
  * modifying the model state and the updating the view.
  */
 
-public class CarController implements Action {
+public class CarController implements VehicleObserver {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
-    protected Timer timer = new Timer(delay, new TimerListener());
-    World gameWorld;
-    CarView frame;
+    private Timer timer = new Timer(delay, new TimerListener());
+    private World world;
+    private CarView frame;
+
     // Calls the gas method for each car once
-    public CarController(World gameworld, CarView frame){
-        this.gameWorld = gameworld;
+    public CarController(World world, CarView frame) {
+        this.world = world;
         this.frame = frame;
         frame.addObserver(this);
-
+        world.addVehicle(VehicleFactory.createVolvo240().setPosition(0, 0));
+        world.addVehicle(VehicleFactory.createSaab95().setPosition(0, 200));
+        world.addVehicle(VehicleFactory.createScania().setPosition(0, 400));
     }
 
-    public void action(Actions actionEnum) {
-        switch(actionEnum) {
+    public void startTimer(){
+        timer.start();
+    }
+
+    public void onVehicleAction(VehicleEvents actionEnum) {
+        switch (actionEnum) {
             case GAS:
-                for (Car car :gameWorld.getCars()) {
-                    car.gas(frame.gasAmount);
-                }
+                world.gasVehicles(frame.gasAmount);
                 break;
             case BREAK:
-                for (Car car :gameWorld.getCars()) {
-                    car.brake(frame.gasAmount);
-                }
+                world.brakeVehicles(frame.gasAmount);
                 break;
-            case STARTALL:
-                for (Car car :gameWorld.getCars()) {
-                    car.startEngine();
-                }
+            case START_ALL:
+                world.startEngines();
                 break;
-            case STOPALL:
-                for (Car car :gameWorld.getCars()) {
-                    car.stopEngine();
-                }
+            case STOP_ALL:
+                world.stopEngines();
                 break;
-            case TURBOON:
-                for (Car car :gameWorld.getCars()) {
-                    try {
-                        ((Saab95) car).setTurboOn();
-                    } catch (Exception e) {
-                    }
-                }
+            case TURBO_ON:
+                world.setTurbosOn();
                 break;
-            case TURBOOFF:
-                for (Car car :gameWorld.getCars()) {
-                    try {
-                        ((Saab95) car).setTurboOff();
-                    } catch (Exception e) {
-                    }
-                }
+            case TURBO_OFF:
+                world.setTurbosOff();
                 break;
-            case LIFTBED:
-                for (Car car :gameWorld.getCars()) {
-                    try {
-                        ((Scania) car).raiseBoard();
-                    } catch (Exception e) {
-                    }
-                }
+            case RAISE_BOARD:
+                world.raiseBoards();
                 break;
-            case LOWERBED:
-                for (Car car :gameWorld.getCars()) {
-                    try {
-                        ((Scania) car).lowerBoard();
-                    } catch (Exception e) {
-                    }
-                }
+            case LOWER_BED:
+                world.lowerBoards();
                 break;
         }
 
 
     }
 
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Car car : gameWorld.getCars()) {
-            car.gas(gas);
-        }
-    }
-
-    void startCars() {
-        for (Car car : gameWorld.getCars()) {
-            car.startEngine();
-        }
-    }
-
-    void stopCars() {
-        for (Car car : gameWorld.getCars()) {
-            car.stopEngine();
-        }
-    }
-
-    void brakeCars(double amount) {
-        for (Car car : gameWorld.getCars()) {
-            car.brake(amount);
-        }
-    }
-
-    void turboOn() {
-        for (Car car : gameWorld.getCars()) {
-            try {
-                ((Saab95) car).setTurboOn();
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    void turboOff() {
-        for (Car car : gameWorld.getCars()) {
-            try {
-                ((Saab95) car).setTurboOff();
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    void liftBed() {
-        for (Car car : gameWorld.getCars()) {
-            try {
-                ((Scania) car).raiseBoard();
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    void lowerBed() {
-        for (Car car : gameWorld.getCars()) {
-            try {
-                ((Scania) car).lowerBoard();
-            } catch (Exception e) {
-            }
-        }
-    }
-
-    /* Each step the TimerListener moves all thegameWorld.getCars() in the list and tells the
+    /* Each step the TimerListener moves all thegameWorld.getVehicles() in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            gameWorld.update();
-            frame.drawPanel.setVehicles(gameWorld.getCars());
+            world.update();
+            frame.drawPanel.setVehicles(world.getVehicles());
             frame.drawPanel.repaint();
         }
     }

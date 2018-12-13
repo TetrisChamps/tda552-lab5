@@ -1,3 +1,4 @@
+import model.VehicleFactory;
 import model.Volvo240;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +12,7 @@ class Volvo240Test {
 
     @BeforeEach
     void setUp() {
-        volvo240 = new Volvo240();
+        Volvo240 volvo240 = (Volvo240) VehicleFactory.createVolvo240();
     }
 
     @AfterEach

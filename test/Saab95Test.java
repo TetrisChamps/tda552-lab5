@@ -1,4 +1,5 @@
 import model.Saab95;
+import model.VehicleFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ class Saab95Test {
     @BeforeEach
     void setUp()
     {
-        saab95 = new Saab95();
+        saab95 = (Saab95)VehicleFactory.createSaab95();
     }
 
     @Test

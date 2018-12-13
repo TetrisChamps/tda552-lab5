@@ -23,6 +23,7 @@ public class Board {
 
     /**
      * If the board is fully raised, returns true, else false.
+     *
      * @return the current angle of the board.
      */
     public boolean isDown() {
