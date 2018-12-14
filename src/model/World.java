@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A representation of a 2 dimensional world in which vehicles and come and interact
@@ -14,9 +15,11 @@ public class World {
     private List<IEngine> iEngineList = new ArrayList<>();
     private List<IBoard> iBoardList = new ArrayList<>();
 
+    private Random rand = new Random();
+
     public World(int worldX, int worldY) {
         this.width = worldX;
-        this.height = worldY - 240;
+        this.height = worldY;
 
     }
 
@@ -58,7 +61,7 @@ public class World {
     /**
      * Returns the list of vehicles contained within the world
      *
-     * @return  The list of vehicles in the world
+     * @return The list of vehicles in the world
      */
     public List<Vehicle> getVehicles() {
         return new ArrayList<>(vehicles);
@@ -67,7 +70,7 @@ public class World {
     /**
      * Adds a vehicle to the world
      *
-     * @param v     Reference to the vehicle to add
+     * @param v Reference to the vehicle to add
      */
     public void addVehicle(Vehicle v) {
         if (v instanceof ITurbo)
@@ -77,6 +80,16 @@ public class World {
         if (v instanceof IEngine)
             iEngineList.add((IEngine) v);
         vehicles.add(v);
+    }
+
+    public void removeVehicle(Vehicle v) {
+        if (v instanceof ITurbo)
+            iTurboList.remove(v);
+        if (v instanceof IBoard)
+            iBoardList.remove(v);
+        if (v instanceof IEngine)
+            iEngineList.remove(v);
+        vehicles.remove(v);
     }
 
     /**
@@ -98,7 +111,7 @@ public class World {
     /**
      * Pushed the "throttle" of all the vehicles
      *
-     * @param amount    How hard to press the throttle
+     * @param amount How hard to press the throttle
      */
     public void gasVehicles(double amount) {
         for (Vehicle v : vehicles)
@@ -108,7 +121,7 @@ public class World {
     /**
      * Pressed the "brake" for all the vehicles
      *
-     * @param amount     How hard to push the brake
+     * @param amount How hard to push the brake
      */
     public void brakeVehicles(double amount) {
         for (Vehicle v : vehicles)
@@ -145,6 +158,44 @@ public class World {
     public void raiseBoards() {
         for (IBoard b : iBoardList)
             b.raise();
+    }
+
+    /**
+     * Adds a random vehicle
+     */
+    public void addRandomVehicle() {
+        if (vehicles.size() >= 10) {
+            return;
+        }
+        int number = rand.nextInt(3);
+        Vehicle vehicle;
+        switch(number){
+            case 0:
+                vehicle = VehicleFactory.createSaab95();
+                break;
+            case 1:
+                vehicle = VehicleFactory.createVolvo240();
+                break;
+            case 2:
+                vehicle = VehicleFactory.createScania();
+                break;
+            default:
+                vehicle = VehicleFactory.createSaab95();
+                break;
+        }
+        vehicle.setPosition(rand.nextDouble() * (width - vehicle.getWidth()), rand.nextDouble() * (height - vehicle.getHeight()));
+        addVehicle(vehicle);
+    }
+
+    /**
+     * Removes a random vehicle
+     */
+    public void removeRandomVehicle() {
+        if (vehicles.isEmpty()) {
+            return;
+        }
+        int index = rand.nextInt(vehicles.size());
+        removeVehicle(vehicles.get(index));
     }
 }
 

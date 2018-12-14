@@ -31,10 +31,12 @@ public class CarView extends JFrame {
 
     private JButton startButton = new JButton("Start all cars");
     private JButton stopButton = new JButton("Stop all cars");
+    private JButton addCarButton = new JButton("Add car");
+    private JButton removeCarButton = new JButton("Remove car");
 
     public CarView(String framename, int sizeX, int sizeY) {
-        drawPanel = new DrawPanel(sizeX, sizeY - 240);
-        initComponents(framename, sizeX, sizeY);
+        drawPanel = new DrawPanel(sizeX, sizeY);
+        initComponents(framename, sizeX, sizeY + 240);
     }
 
     /**
@@ -67,9 +69,11 @@ public class CarView extends JFrame {
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton, 3);
+        controlPanel.add(brakeButton, 4);
+        controlPanel.add(turboOffButton, 5);
+        controlPanel.add(lowerBedButton, 6);
+        controlPanel.add(removeCarButton, 7);
         controlPanel.setPreferredSize(new Dimension((x / 2) + 4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -92,6 +96,9 @@ public class CarView extends JFrame {
         turboOffButton.addActionListener(e -> notifyCarObserver(VehicleEvents.TURBO_OFF));
         liftBedButton.addActionListener(e -> notifyCarObserver(VehicleEvents.RAISE_BOARD));
         lowerBedButton.addActionListener(e -> notifyCarObserver(VehicleEvents.LOWER_BED));
+
+        addCarButton.addActionListener(e -> notifyCarObserver(VehicleEvents.ADD));
+        removeCarButton.addActionListener(e -> notifyCarObserver(VehicleEvents.REMOVE));
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

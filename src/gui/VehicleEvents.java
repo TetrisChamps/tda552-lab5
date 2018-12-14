@@ -11,5 +11,7 @@ public enum VehicleEvents {
     TURBO_ON,
     TURBO_OFF,
     RAISE_BOARD,
-    LOWER_BED
+    LOWER_BED,
+    ADD,
+    REMOVE
 }

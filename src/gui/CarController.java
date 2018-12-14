@@ -58,6 +58,12 @@ public class CarController implements VehicleObserver {
             case LOWER_BED:
                 world.lowerBoards();
                 break;
+            case ADD:
+                world.addRandomVehicle();
+                break;
+            case REMOVE:
+                world.removeRandomVehicle();
+                break;
         }
     }
 
