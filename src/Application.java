@@ -1,5 +1,5 @@
 import gui.CarController;
-import gui.CarView;
+import view.CarView;
 import model.*;
 
 public class Application {

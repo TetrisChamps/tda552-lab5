@@ -2,6 +2,9 @@ package gui;
 
 import model.VehicleFactory;
 import model.World;
+import view.CarView;
+import view.VehicleEvents;
+import view.VehicleObserver;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

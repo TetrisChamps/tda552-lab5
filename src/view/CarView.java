@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 import java.util.ArrayList;
 import javax.swing.*;
@@ -13,13 +13,13 @@ import java.awt.*;
 public class CarView extends JFrame {
     private ArrayList<VehicleObserver> observers = new ArrayList<>();
 
-    DrawPanel drawPanel;
+    public DrawPanel drawPanel;
 
     private JPanel controlPanel = new JPanel();
 
     private JPanel gasPanel = new JPanel();
     private JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 100;
+    public int gasAmount = 0;
     private JLabel gasLabel = new JLabel("Amount of gas");
 
     private JButton gasButton = new JButton("Gas");

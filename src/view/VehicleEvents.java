@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 /**
  * An enum of all the events than can be broadcast by a car observable

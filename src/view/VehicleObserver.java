@@ -1,4 +1,4 @@
-package gui;
+package view;
 
 /**
  * Interface of an observer to vehicle events
